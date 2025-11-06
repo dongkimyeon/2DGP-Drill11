@@ -18,6 +18,7 @@ ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 10.0
 
 animation_names = ['Walk']
+ground_top = 50
 
 class Zombie:
     images = None
@@ -33,7 +34,6 @@ class Zombie:
         self.width = 200
         self.height = 200
         self.x = random.randint(1600-800, 1600)
-        ground_top = 50
         self.y = ground_top + (self.height * self.scale) / 2
         self.load_images()
         self.frame = random.randint(0, 9)
@@ -66,4 +66,5 @@ class Zombie:
 
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
-            game_world.remove_object(self)
+            self.scale /= 2
+            self.y = ground_top + (self.height * self.scale) / 2

@@ -4,6 +4,8 @@ class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
 
+    def get_bb(self):
+        return 0, 0, 1600-1, 50
     def update(self):
         pass
 

@@ -1,3 +1,5 @@
+from encodings.punycode import selective_find
+
 from pico2d import load_image, get_time, load_font, draw_rectangle
 from sdl2 import SDL_KEYDOWN, SDLK_SPACE, SDLK_RIGHT, SDL_KEYUP, SDLK_LEFT
 
@@ -5,6 +7,7 @@ import game_world
 import game_framework
 
 from ball import Ball
+from zombie import Zombie
 from state_machine import StateMachine
 
 
@@ -159,7 +162,6 @@ class Boy:
         )
 
 
-
     def update(self):
         self.state_machine.update()
 
@@ -187,4 +189,6 @@ class Boy:
     def handle_collision(self,group, other):
         if group == 'boy:ball':
             self.ball_count += 1
+        if group == 'boy:zombie':
+            game_framework.running = False
 

@@ -33,13 +33,16 @@ def init():
     global balls
     balls = [Ball(random.randint(100, 1600 - 100), 60, 0) for _ in range(30)]
     game_world.add_objects(balls, 1)
-    
+
 
 def update():
     game_world.update()
     for ball in balls:
         if game_world.collide(boy, ball):
             print('COLLISION boy : ball')
+            boy.ball_count += 1
+            game_world.remove_object(ball)
+            balls.remove(ball)
 
 def draw():
     clear_canvas()

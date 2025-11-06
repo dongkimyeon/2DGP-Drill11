@@ -38,4 +38,5 @@ class Ball:
         elif group == 'grass:ball':
             self.stopped = True
         elif group == 'zombie:ball':
-            game_world.remove_object(self)
+            if not self.stopped:
+                game_world.remove_object(self)

@@ -26,6 +26,7 @@ def init():
 
     grass = Grass()
     game_world.add_object(grass, 0)
+    game_world.add_collision_pair('grass:ball', grass, None)
 
     boy = Boy()
     game_world.add_object(boy, 1)
@@ -42,12 +43,7 @@ def init():
 def update():
     game_world.update()
     game_world.handle_collisions()
-    for ball in balls:
-        if game_world.collide(boy, ball):
-            print('COLLISION boy : ball')
-            boy.ball_count += 1
-            game_world.remove_object(ball)
-            balls.remove(ball)
+
 
 def draw():
     clear_canvas()

@@ -63,7 +63,7 @@ class Zombie:
 
     def handle_event(self, event):
         pass
-
+    #제출용 커밋
     def handle_collision(self, group, other):
         if group == 'zombie:ball':
             if not other.stopped:

@@ -33,9 +33,7 @@ def init():
 
 def update():
     game_world.update()
-    for ball in balls:
-        if game_world.collide(boy, ball):
-            print('COLLISION boy : ball')
+
 
 def draw():
     clear_canvas()

@@ -41,6 +41,7 @@ def init():
 
 def update():
     game_world.update()
+    game_world.handle_collisions()
     for ball in balls:
         if game_world.collide(boy, ball):
             print('COLLISION boy : ball')

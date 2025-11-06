@@ -29,14 +29,17 @@ class Zombie:
                 Zombie.images[name] = [load_image("./zombie/"+ name + " (%d)" % i + ".png") for i in range(1, 11)]
 
     def __init__(self):
-        self.x, self.y = random.randint(1600-800, 1600), 150
+        self.scale = 1
+        self.x, self.y = random.randint(1600-800, 1600), 150 * self.scale
         self.load_images()
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1,1])
+        self.width = 200
+        self.height = 200
 
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - 100 * self.scale, self.y - 100 * self.scale, self.x + 100 * self.scale, self.y + 100 * self.scale
 
     def update(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
@@ -51,15 +54,16 @@ class Zombie:
 
     def draw(self):
         if self.dir < 0:
-            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, self.width * self.scale, self.height * self.scale )
         else:
-            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 200, 200)
+            Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, self.width * self.scale, self.height *self.scale )
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         pass
 
     def handle_collision(self, group, other):
-        pass
+        if group == 'zombie:ball':
+            game_world.remove_object(self)
 
 
